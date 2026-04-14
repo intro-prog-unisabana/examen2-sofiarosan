@@ -6,18 +6,25 @@ import lap_timer
 
 
 def main():
-    #  Pedir el nombre del archivo al usuario usando input()
-    archivo=input()
-    #  Abrir el archivo y leer el numero de vueltas n
-    with open(archivo, 'r') as f:
-        n= int(f.readline())
-    #  Crear el cronometro usando lap_timer.init(n)
-        cronometro = lap_timer.init(n)
-    # Leer los n tiempos de vuelta y agregarlos con lap_timer.add_lap()
-        
-    # Imprimir la racha decreciente mas larga
-    #       usando lap_timer.longest_decreasing_streak()
+    archivo = input()
 
+    # Abrir archivo
+    with open(archivo, 'r') as f:
+        # Leer número de vueltas
+        n = int(f.readline())
+
+        # Crear cronómetro
+        cronometro = lap_timer.init(n)
+
+        # Leer los tiempos y agregarlos
+        for _ in range(n):
+            tiempo = float(f.readline())
+            lap_timer.add_lap(cronometro, tiempo)
+
+    # Calcular racha decreciente
+    racha = lap_timer.longest_decreasing_streak(cronometro)
+
+    print(racha)
 
 if __name__ == "__main__":
     main()
